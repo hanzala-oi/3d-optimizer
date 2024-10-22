@@ -60,11 +60,14 @@ export async function optimizeGLB(inputFilePath, outputFilePath) {
   try {
     const readFile = promisify(fs.readFile);
     const writeFile = promisify(fs.writeFile);
+    const dracoDecoderPath = "/draco_decoder.wasm";
 
     // Ensure Draco compression options use the correct path for the decoder
     const options = {
       dracoOptions: {
-        decoder: draco3d.createDecoderModule({}),
+        decoder: draco3d.createDecoderModule({
+          wasmBinary: fs.readFileSync(dracoDecoderPath),
+        }),
         compressionLevel: 10,
       },
       removeUnusedElements: true,

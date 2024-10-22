@@ -1,15 +1,16 @@
 {
   "version": 2,
+
   "builds": [
     {
-      "src": "app.js",
+      "src": "api/*.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "app.js"
+      "src": "/draco_decoder.wasm",
+      "dest": "/public/draco_decoder.wasm"
     }
   ]
 }
