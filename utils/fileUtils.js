@@ -1,6 +1,7 @@
-import axios from "axios";
 import pkg from "gltf-pipeline";
 const { processGlb } = pkg;
+import draco3d from "draco3d";
+import path from "path";
 import { promisify } from "util";
 import fs from "fs";
 import { BlobServiceClient } from "@azure/storage-blob";
@@ -63,15 +64,26 @@ export async function optimizeGLB(inputFilePath, outputFilePath) {
     // Read the input GLB file
     const inputData = await readFile(inputFilePath);
 
+    // Set the correct path for the Draco WASM decoder
+    const decoderPath = path.join(
+      __dirname,
+      "node_modules/draco3d/draco_decoder.wasm"
+    );
+
+    const dracoModule = draco3d.createDecoderModule({
+      wasmBinaryFile: decoderPath,
+    });
+
     // Apply multiple optimizations
     const options = {
       dracoOptions: {
         compressionLevel: 10, // Set the compression level (1-10) for Draco compression
+        draco: dracoModule, // Pass the Draco module explicitly
       },
       removeUnusedElements: true, // Remove unused nodes, meshes, materials
       quantize: true, // Apply quantization to reduce the precision of vertex attributes
       generateMipmaps: true, // Generate mipmaps for better rendering performance
-      // binary: true, // Convert GLTF to GLB format if necessary (optional)
+      binary: true, // Convert GLTF to GLB format if necessary (optional)
     };
 
     const results = await processGlb(inputData, options);
