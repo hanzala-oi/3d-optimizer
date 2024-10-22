@@ -15,7 +15,6 @@
     "@azure/storage-blob": "^12.25.0",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
-    "draco3d": "^1.5.7",
     "express": "^4.21.1",
     "gltf-pipeline": "^4.1.0",
     "multer": "^1.4.5-lts.1",

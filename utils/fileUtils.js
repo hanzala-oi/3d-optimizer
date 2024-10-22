@@ -1,14 +1,13 @@
 import axios from "axios";
-import pkg from "gltf-pipeline";
-const { processGlb } = pkg;
-import { promisify } from "util";
 import fs from "fs";
 import { BlobServiceClient } from "@azure/storage-blob";
-import dontenv from "dotenv";
-import draco3d from "draco3d";
+import dotenv from "dotenv";
+import gltfPipeline from "gltf-pipeline";
+
+const { processGlb } = gltfPipeline;
 
 // Load environment variables from .env file
-dontenv.config();
+dotenv.config();
 
 // Azure Blob Storage setup
 const account = "3deditor";
@@ -55,34 +54,40 @@ export async function downloadFile(fileUrl, outputLocationPath) {
   }
 }
 
-// Optimization function using gltf-pipeline with Draco compression
+// Optimization function using gltf-pipeline
 export async function optimizeGLB(inputFilePath, outputFilePath) {
   try {
-    const readFile = promisify(fs.readFile);
-    const writeFile = promisify(fs.writeFile);
-    const dracoDecoderPath = "/draco_decoder.wasm";
+    const glbBuffer = fs.readFileSync(inputFilePath);
 
-    // Ensure Draco compression options use the correct path for the decoder
+    // Define the optimization options
     const options = {
-      dracoOptions: {
-        decoder: draco3d.createDecoderModule({
-          wasmBinary: fs.readFileSync(dracoDecoderPath),
-        }),
-        compressionLevel: 10,
+      dracoOptions: { compressionLevel: 7 }, // Geometry compression
+      preserveUnusedSemantics: false, // Removes unused semantics
+      compressTextures: true, // Enable texture compression
+      textureCompressionOptions: {
+        // Options for texture compression
+        format: "ktx2", // Use KTX2 format for textures
+        quality: 75, // Texture quality percentage
       },
-      removeUnusedElements: true,
-      quantize: true,
-      generateMipmaps: true,
+      simplify: true, // Enable mesh simplification
+      simplifyOptions: {
+        // Mesh simplification options
+        targetError: 0.1, // The target error for simplification (0 = no simplification, 1 = aggressive simplification)
+      },
+      optimizeForCesium: false, // Specific optimization for Cesium
+      removeUnusedMaterials: true, // Remove unused materials
     };
 
-    const inputData = await readFile(inputFilePath);
-    const results = await processGlb(inputData, options);
-    await writeFile(outputFilePath, results.glb);
+    // Process the GLB with all the optimizations
+    const results = await processGlb(glbBuffer, options);
+
+    fs.writeFileSync(outputFilePath, results.glb);
     return outputFilePath;
   } catch (error) {
     throw new Error(`gltf-pipeline error: ${error.message}`);
   }
 }
+
 // Function to upload a file to Azure Blob Storage
 export async function uploadToAzureBlob(filePath, fileName) {
   try {
