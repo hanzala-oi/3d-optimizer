@@ -5,6 +5,7 @@ import { promisify } from "util";
 import fs from "fs";
 import { BlobServiceClient } from "@azure/storage-blob";
 import dontenv from "dotenv";
+import draco3d from "draco3d";
 
 // Load environment variables from .env file
 dontenv.config();
@@ -60,31 +61,25 @@ export async function optimizeGLB(inputFilePath, outputFilePath) {
     const readFile = promisify(fs.readFile);
     const writeFile = promisify(fs.writeFile);
 
-    // Read the input GLB file
-    const inputData = await readFile(inputFilePath);
-
-    // Apply multiple optimizations
+    // Ensure Draco compression options use the correct path for the decoder
     const options = {
       dracoOptions: {
-        compressionLevel: 10, // Set the compression level (1-10) for Draco compression
+        decoder: draco3d.createDecoderModule({}),
+        compressionLevel: 10,
       },
-      removeUnusedElements: true, // Remove unused nodes, meshes, materials
-      quantize: true, // Apply quantization to reduce the precision of vertex attributes
-      generateMipmaps: true, // Generate mipmaps for better rendering performance
-      // binary: true, // Convert GLTF to GLB format if necessary (optional)
+      removeUnusedElements: true,
+      quantize: true,
+      generateMipmaps: true,
     };
 
+    const inputData = await readFile(inputFilePath);
     const results = await processGlb(inputData, options);
-
-    // Write the optimized GLB file to the output path
     await writeFile(outputFilePath, results.glb);
-
     return outputFilePath;
   } catch (error) {
     throw new Error(`gltf-pipeline error: ${error.message}`);
   }
 }
-
 // Function to upload a file to Azure Blob Storage
 export async function uploadToAzureBlob(filePath, fileName) {
   try {
