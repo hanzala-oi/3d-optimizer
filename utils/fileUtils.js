@@ -6,6 +6,7 @@ import { promisify } from "util";
 import fs from "fs";
 import { BlobServiceClient } from "@azure/storage-blob";
 import dontenv from "dotenv";
+import axios from "axios";
 
 // Load environment variables from .env file
 dontenv.config();
