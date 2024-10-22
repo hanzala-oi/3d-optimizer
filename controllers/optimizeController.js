@@ -3,9 +3,11 @@ import {
   optimizeGLB,
   uploadToAzureBlob,
 } from "../utils/fileUtils.js";
-import path from "path";
+
 import fs from "fs";
 import { fileURLToPath } from "url";
+
+import path from "path";
 
 // To handle __dirname in ES Modules
 const __filename = fileURLToPath(import.meta.url);

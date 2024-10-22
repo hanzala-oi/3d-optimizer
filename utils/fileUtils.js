@@ -2,8 +2,10 @@ import pkg from "gltf-pipeline";
 const { processGlb } = pkg;
 import draco3d from "draco3d";
 import path from "path";
+import { fileURLToPath } from "url";
 import { promisify } from "util";
 import fs from "fs";
+
 import { BlobServiceClient } from "@azure/storage-blob";
 import dontenv from "dotenv";
 import axios from "axios";
@@ -19,6 +21,10 @@ const blobServiceClient = new BlobServiceClient(
   `https://${account}.blob.core.windows.net/?${sas}`
 );
 const containerClient = blobServiceClient.getContainerClient("models");
+
+// Define __dirname in ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Function to handle Google Drive URL conversion
 function getGoogleDriveDirectDownloadUrl(driveUrl) {
@@ -68,11 +74,11 @@ export async function optimizeGLB(inputFilePath, outputFilePath) {
     // Set the correct path for the Draco WASM decoder
     const decoderPath = path.join(
       __dirname,
-      "node_modules/draco3d/draco_decoder.wasm"
+      "../node_modules/draco3d/draco_decoder.wasm"
     );
 
     const dracoModule = draco3d.createDecoderModule({
-      wasmBinaryFile: decoderPath,
+      wasmBinaryFile: decoderPath, // Path to the WASM decoder
     });
 
     // Apply multiple optimizations
