@@ -19,7 +19,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: `http://http://3.109.126.118:3000`,
+      url: `http://3.109.126.118:3000`,
     },
   ],
 };
