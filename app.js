@@ -42,5 +42,7 @@ app.use("/", optimizeRoutes);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Swagger docs available at your URL /api-docs`);
+  console.log(
+    `Swagger docs available at your https://3doptimizer.vortexstudio.in/api-docs`
+  );
 });
