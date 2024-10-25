@@ -19,7 +19,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: `http://3.109.126.118:3000`,
+      url: `https://3doptimizer.vortexstudio.in`,
     },
   ],
 };
@@ -42,5 +42,5 @@ app.use("/", optimizeRoutes);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`);
+  console.log(`Swagger docs available at your URL /api-docs`);
 });
