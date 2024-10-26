@@ -2,6 +2,7 @@ import express from "express";
 import optimizeRoutes from "./routes/optimize.js";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import morgan from "morgan";
 
 const app = express();
 const PORT = 3000;
@@ -32,6 +33,8 @@ const options = {
 
 // Initialize swagger-jsdoc
 const swaggerSpec = swaggerJsdoc(options);
+
+app.use(morgan("combined")); // Use 'combined' format for detailed logs
 
 // Swagger UI route
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
