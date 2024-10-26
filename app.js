@@ -3,12 +3,14 @@ import optimizeRoutes from "./routes/optimize.js";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import morgan from "morgan";
+import cors from "cors";
 
 const app = express();
 const PORT = 3000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(cors());
 
 // Swagger definition
 const swaggerDefinition = {
