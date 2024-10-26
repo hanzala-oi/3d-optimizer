@@ -14,7 +14,7 @@ app.use(cors());
 
 // Swagger definition
 const swaggerDefinition = {
-  openapi: "3.0.0",
+  openapi: "3.1.0",
   info: {
     title: "Optimization API",
     version: "1.0.0",
@@ -43,6 +43,10 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
 app.use("/", optimizeRoutes);
+
+app.get("/test", (req, res) => {
+  res.send("Test endpoint reached");
+});
 
 // Start the server
 app.listen(PORT, () => {
