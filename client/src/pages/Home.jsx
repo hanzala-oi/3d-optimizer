@@ -1,3 +1,5 @@
+import { FaExternalLinkAlt } from "react-icons/fa";
+
 function Home() {
   return (
     <div className="min-h-screen font-poppins flex flex-col items-center justify-center bg-gray-100 py-12 px-6 sm:px-10 lg:px-32">
@@ -21,6 +23,11 @@ function Home() {
         <p className="text-gray-700 mt-6">
           Start optimizing your 3D models with just a few clicks!
         </p>
+        <div className="flex justify-center">
+          <button className="bg-blue-500 flex items-center justify-center gap-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">
+            Optimize Now <FaExternalLinkAlt />
+          </button>
+        </div>
       </div>
     </div>
   );

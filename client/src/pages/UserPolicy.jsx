@@ -11,9 +11,10 @@ export default function PrivacyPolicy() {
             1. Introduction
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            Welcome to our privacy policy page. We respect your privacy and are
-            committed to protecting the personal information you share with us.
-            This policy outlines how we collect, use, and safeguard your data.
+            Welcome to the privacy policy page for the 3D Optimizer Tool ("the
+            Tool"). We respect your privacy and are committed to protecting the
+            personal information you share with us. This policy outlines how we
+            collect, use, and safeguard your data.
           </p>
         </section>
 
@@ -23,13 +24,13 @@ export default function PrivacyPolicy() {
           </h2>
           <ul className="list-decimal pl-6 text-gray-700 leading-relaxed space-y-2">
             <li>
-              Personal Identification Information (Name, email address, phone
-              number, etc.)
+              Google Drive Links: Used to access your GLB 3D model files for
+              optimization purposes only.
             </li>
             <li>
-              Usage data (IP address, browser type, operating system, etc.)
+              Optimized Files: Temporarily stored on secure Azure Blob Storage
+              to generate a downloadable link.
             </li>
-            <li>Cookies and tracking technologies</li>
           </ul>
         </section>
 
@@ -38,67 +39,59 @@ export default function PrivacyPolicy() {
             3. How We Use Your Information
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            We may use the information we collect from you for various purposes,
-            including:
+            The information provided is used exclusively for:
           </p>
           <ul className="list-decimal pl-6 text-gray-700 leading-relaxed space-y-2">
             <li>
-              To personalize your experience and better respond to your
-              individual needs.
-            </li>
-            <li>To improve our website and services based on your feedback.</li>
-            <li>
-              To administer a contest, promotion, survey, or other site feature.
+              File Access and Optimization: Accessing and optimizing the GLB 3D
+              model using gltfpack technology.
             </li>
             <li>
-              To send periodic emails regarding your account or other products
-              and services.
+              Providing Download Links: Sharing a downloadable link for the
+              optimized model.
             </li>
           </ul>
         </section>
 
         <section className="mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-3">
-            4. Information Protection
+            4. Data Retention and Storage
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            We adopt appropriate data collection, storage, and processing
-            practices and security measures to protect against unauthorized
-            access, alteration, disclosure, or destruction of your personal
-            information.
+            Files are temporarily stored on secure Azure Blob Storage and
+            deleted automatically after a specified period or once the download
+            link has expired. We do not retain any files long-term.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-3">
-            5. Cookies
+            5. Information Sharing
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            Our site may use "cookies" to enhance the user experience. Your web
-            browser places cookies on your hard drive for record-keeping
-            purposes and sometimes to track information about you.
+            We do not share your data with third-party services, advertisers, or
+            partners. Files are solely used for optimization and are not
+            accessible to external parties.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-3">
-            6. Third-Party Links
+            6. Security Measures
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            Occasionally, at our discretion, we may include or offer third-party
-            products or services on our website. These third-party sites have
-            separate and independent privacy policies.
+            We implement data encryption, access controls, and regular audits to
+            protect your data while using the Tool.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-3">
-            7. Changes to Our Privacy Policy
+            7. Changes to This Privacy Policy
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            We may update our privacy policy from time to time. We encourage
-            users to frequently check this page for any changes to stay informed
-            about how we are protecting the personal information we collect.
+            We may update our privacy policy periodically. Please review this
+            page regularly to stay informed about how we handle your data.
           </p>
         </section>
 
@@ -107,13 +100,12 @@ export default function PrivacyPolicy() {
             8. Contact Us
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            If you have any questions about this Privacy Policy, please contact
-            us at:
+            If you have questions or concerns about this privacy policy, please
+            contact us at:
           </p>
-          <p className="text-gray-700 font-medium mt-2">
-            Email: support@example.com
+          <p className="text-gray-700 font-medium mt-2 flex ">
+            Email: <p className="font-bold ml-3"> contact@vortexstudio.in</p>
           </p>
-          <p className="text-gray-700 font-medium">Phone: (123) 456-7890</p>
         </section>
       </div>
     </div>
