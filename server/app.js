@@ -48,13 +48,14 @@ app.use(morgan("combined")); // Use 'combined' format for detailed logs
 // Swagger UI route
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// // Routes
+// Routes
 app.use("/", optimizeRoutes);
-app.get("/test", (req, res) => {
-  res.send("Test endpoint reached");
-});
 
-app.get("*", (req, res) => {
+// app.get("/test", (req, res) => {
+//   res.send("Test endpoint reached");
+// });
+
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
