@@ -5,12 +5,19 @@ import swaggerUi from "swagger-ui-express";
 import morgan from "morgan";
 import cors from "cors";
 
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = 3000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, "dist")));
 
 // Swagger definition
 const swaggerDefinition = {
@@ -39,10 +46,13 @@ const swaggerSpec = swaggerJsdoc(options);
 app.use(morgan("combined")); // Use 'combined' format for detailed logs
 
 // Swagger UI route
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Routes
+// // Routes
 app.use("/", optimizeRoutes);
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
 app.get("/test", (req, res) => {
   res.send("Test endpoint reached");
