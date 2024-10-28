@@ -24,9 +24,11 @@ function Home() {
           Start optimizing your 3D models with just a few clicks!
         </p>
         <div className="flex justify-center">
-          <button className="bg-blue-500 flex items-center justify-center gap-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">
-            Optimize Now <FaExternalLinkAlt />
-          </button>
+          <a href="https://chatgpt.com/g/g-llkBS9ZyV-3d-model-optimizer">
+            <button className="bg-blue-500 flex items-center justify-center gap-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">
+              Optimize Now <FaExternalLinkAlt />
+            </button>
+          </a>
         </div>
       </div>
     </div>
